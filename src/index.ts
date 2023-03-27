@@ -88,13 +88,13 @@ function parseBody(
   method: string | undefined,
   body: string | null | undefined,
   contentType: string | undefined,
-): object | null {
+): string | null {
   const isValidContentType = contentType?.startsWith('application/json');
   const isValidPostRequest =
-    method === 'POST' && typeof body === 'string' && isValidContentType;
+    method === 'POST' && isValidContentType;
 
-  if (isValidPostRequest) {
-    return JSON.parse(body);
+  if (isValidPostRequest && body) {
+    return body;
   }
   return null;
 }
